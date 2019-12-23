@@ -1,68 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### React lifeCycle Study
 
-## Available Scripts
+- constructor
 
-In the project directory, you can run:
+  - 컴포넌트의 생성자 부분입니다.
 
-### `yarn start`
+- componentWillMount (after v16.3 deprecate)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- componentDidMount
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  - 컴포넌트가 화면에 나타났을 때 호출됩니다.
+  - DOM에 직접 접근할 수 있는 부분으로서, `axios`, `fetch`작업을 하는 부분이기도 합니다.
 
-### `yarn test`
+- componentWillReceiveProps (after v16.3 deprecate)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- getDerivedStateFromProps
 
-### `yarn build`
+- shouldComponentUpdate
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - 변경된 `State`에 대해서 `rendering`을 다시 할지 안할지 결정하는 부분.
+  - 여기서 성능 최적화를 진행함.
+  - `true`혹은 `false`를 리턴함.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- getSnapshotBeforeUpdate
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  - `shouldComponentUpdate`에서 true를 리턴하면 호출하는 API
+  - 주로 애니메이션 효과를 초기화하거나 이벤트 리스너를 없애는 작업
 
-### `yarn eject`
+- componentDidUpdate
+- 컴포넌트의 `State`가 업데이트된 후에 호출되는 API
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- componentWillUnmount
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  - 이벤트리스터를 제거하거나, `setTimeOut`을 `clearTimeout`을 통해서 제거해주고, 추가적으로 외부라이브러리를 `dispose`할 수 있다면 여기서 해줍니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- componentDidCatch
+  - 에러가 발생했을 때 호출되는 API입니다.
